@@ -1,6 +1,6 @@
 <template>
   <div class="page-main">
-    <example-block />
+    <calendar-block />
   </div>
 </template>
 

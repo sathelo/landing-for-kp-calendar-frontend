@@ -7,6 +7,6 @@ Css блоков в итоговой сборке будет иметь тако
 имели возможность переопределить стили корневого элемента ребёнка без использования !important
 */
 
-import ExampleBlock from './example/example.vue';
+import CalendarBlock from './calendar/calendar.vue';
 
-Vue.component('example-block', ExampleBlock);
+Vue.component('calendar-block', CalendarBlock);
