@@ -7,6 +7,8 @@ Css блоков в итоговой сборке будет иметь тако
 имели возможность переопределить стили корневого элемента ребёнка без использования !important
 */
 
+import PopupBlock from './popup/popup.vue';
 import CalendarBlock from './calendar/calendar.vue';
 
+Vue.component('popup-block', PopupBlock);
 Vue.component('calendar-block', CalendarBlock);

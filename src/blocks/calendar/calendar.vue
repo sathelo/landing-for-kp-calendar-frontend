@@ -7,15 +7,15 @@
         <div class="main__subtitle">{{ subtitle }}</div>
       </div>
 
-      <div v-for="(data, index) in dates" :key="index" class="calendar__dates dates">
-        <div class="dates__container">
+      <div class="calendar__dates dates">
+        <div v-for="(data, index) in dates" :key="index" class="dates__container">
           <div
-            :class="{ 'btn--hidden': isHidden(data.date) }"
+            :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive() }"
             class="dates__btn btn"
-            @click="isHidden(data.date) ? null : clickDate()"
+            @click="hasHidden(data.date) ? null : clickDate()"
           >
             <img
-              v-if="isHidden(data.date)"
+              v-if="hasHidden(data.date)"
               :src="getStaticUrl('closed.svg')"
               alt="ico-closed"
               class="btn__img"
@@ -50,6 +50,7 @@ export default {
   name: 'calendar-block',
   data() {
     return {
+      isActive: false,
       monthNames: [
         'Январь',
         'Февраль',
@@ -171,14 +172,16 @@ export default {
   },
   beforeMount() {
     this.currentDate = new Date();
-    console.log(this.currentDate);
   },
   methods: {
     clickDate() {
-      console.log('YES');
+      this.isActive = !this.isActive;
     },
-    isHidden(date) {
+    hasHidden(date) {
       return this.currentDate - date <= 0;
+    },
+    hasActive() {
+      return this.isActive;
     },
   },
 };

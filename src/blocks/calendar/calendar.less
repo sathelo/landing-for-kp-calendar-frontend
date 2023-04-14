@@ -16,6 +16,10 @@
   }
 
   &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow-y: scroll;
   }
 
@@ -57,9 +61,15 @@
 }
 
 .dates {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+
   .btn {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     background: rgba(1, 65, 255, 0.06);
     backdrop-filter: blur(48px);
@@ -67,6 +77,7 @@
     padding: 6px;
     width: 128px;
     height: 128px;
+    cursor: pointer;
 
     &__date {
       font-style: normal;
@@ -95,6 +106,7 @@
       line-height: 100%;
       text-align: center;
       color: rgba(255, 255, 255, 0.5);
+      padding: 30px 6px;
 
       .btn {
         &__img {
@@ -117,7 +129,21 @@
           color: rgba(255, 255, 255, 0.5);
           margin-right: 6px;
         }
+
+        &__month {
+          align-items: center;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 100%;
+          text-align: center;
+          color: rgba(255, 255, 255, 0.5);
+        }
       }
+    }
+
+    &.btn--active {
+      background: #000;
     }
   }
 }
