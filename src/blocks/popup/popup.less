@@ -1,14 +1,35 @@
 @import '../../styles/helpers';
 
+// вынести в btn.less
+.btn {
+  &--primary {
+    background: linear-gradient(90deg, #1538F5 0%, #3A83F7 83.17%);
+    padding: 18px 36px;
+    border-radius: 13px;
+  }
+
+  &--ghost {
+    background: #C7DCFF;
+    padding: 18px 36px;
+    border-radius: 13px;
+  }
+}
+
 .popup {
-  position: relative;
+  max-width: 995px;
   background: #FFF;
+  box-shadow: 0 2.76389px 82.9167px rgba(125, 162, 227, 0.25);
+  border-radius: 40px;
 
   .header {
-    padding: 44px;
+    display: flex;
+    padding: 0 44px;
 
     &__info {
       display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      max-width: 433px;
     }
 
     &__date {
@@ -19,7 +40,10 @@
       letter-spacing: 0.01em;
       text-transform: uppercase;
       color: #2353E0;
+      background: #F4F7FA;
       padding: 6px;
+      border-radius: 6px;
+      margin-bottom: 20px;
     }
 
     &__title {
@@ -29,6 +53,7 @@
       line-height: 96%;
       letter-spacing: -0.05em;
       color: #1134B5;
+      margin-bottom: 20px;
     }
 
     &__subtitle {
@@ -39,24 +64,69 @@
       letter-spacing: -0.02em;
       opacity: 0.7;
       color: #102752;
+      margin-bottom: 32px;
     }
 
-    .btn {
-      &__watching {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 24px;
-        color: #FFF;
-      }
+    &__btn {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      color: #FFF;
+      margin-bottom: 65px;
+    }
+
+    &__img {
+      object-fit: contain;
     }
   }
 
   .main {
+    .img('bg-form.jpg');
+    border-radius: 60px;
+    padding: 0 44px;
 
+    &__container {
+      display: flex;
+    }
+
+    .info {
+      max-width: 433px;
+
+      &__title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 44px;
+        line-height: 96%;
+        letter-spacing: -0.05em;
+        color: #122790;
+      }
+
+      &__subtitle {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 140%;
+        letter-spacing: -0.02em;
+        color: #102752;
+        opacity: 0.7;
+      }
+
+      &__btn {
+        display: flex;
+
+        &:last-child {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .cards {
+
+    }
   }
 
   .footer {
-
+    padding: 0 44px;
   }
 }
