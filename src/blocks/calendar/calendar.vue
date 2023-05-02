@@ -1,5 +1,6 @@
 <template>
   <div class="calendar">
+    <popup-block v-if="isModal" :data="infoModal" />
     <div class="calendar__container">
       <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
       <div class="calendar__main main">
@@ -10,9 +11,9 @@
       <div class="calendar__dates dates">
         <div v-for="(data, index) in dates" :key="index" class="dates__container">
           <div
-            :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive() }"
+            :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
             class="dates__btn btn"
-            @click="hasHidden(data.date) ? null : clickDate()"
+            @click="hasHidden(data.date) ? null : clickDate(index)"
           >
             <img
               v-if="hasHidden(data.date)"
@@ -22,7 +23,10 @@
             />
             <div class="btn__info">
               <div class="btn__date">{{ data.date.getDate() }}</div>
-              <div class="btn__month">{{ monthNames[data.date.getMonth()] }}</div>
+              <div class="btn__month">{{ monthNames[data.date.getMonth()].toLowerCase() }}</div>
+            </div>
+            <div v-if="hasActive(index)" class="btn--more" @click="clickMore(data)">
+              <img :src="getStaticUrl('arrow-right.svg')" alt="arrow-right" />
             </div>
           </div>
         </div>
@@ -50,6 +54,8 @@ export default {
   name: 'calendar-block',
   data() {
     return {
+      infoModal: Object,
+      isModal: false,
       isActive: false,
       monthNames: [
         'Январь',
@@ -174,14 +180,19 @@ export default {
     this.currentDate = new Date();
   },
   methods: {
-    clickDate() {
-      this.isActive = !this.isActive;
+    clickDate(dataId) {
+      this.isActive = dataId;
     },
     hasHidden(date) {
       return this.currentDate - date <= 0;
     },
-    hasActive() {
-      return this.isActive;
+    hasActive(dataId) {
+      return this.isActive === dataId;
+    },
+    clickMore(data) {
+      this.isModal = !this.isModal;
+      this.infoModal = data;
+      console.log(this.infoModal);
     },
   },
 };
