@@ -1,64 +1,70 @@
 <template>
-  <div class="calendar">
+  <div>
     <popup-block v-if="isModal" :data="infoModal" @closeModal="closeModal" />
-    <div class="calendar__container">
-      <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
-      <div class="calendar-main">
-        <div class="calendar-main__title">{{ title }}</div>
-        <div class="calendar-main__subtitle">{{ subtitle }}</div>
-      </div>
+    <div :class="{ 'open-modal': isModal }" class="calendar">
+      <div class="calendar__container">
+        <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
+        <div class="calendar-main">
+          <div class="calendar-main__title">{{ title }}</div>
+          <div class="calendar-main__subtitle">{{ subtitle }}</div>
+        </div>
 
-      <div class="calendar-dates">
-        <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
-          <div
-            :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
-            class="calendar-dates__btn calendar-dates-btn"
-            @click="hasHidden(data.date) ? null : clickDate(index)"
-          >
-            <img
-              v-if="hasHidden(data.date)"
-              :src="getStaticUrl('closed.svg')"
-              alt="calendar-dates-btn-closed"
-              class="calendar-dates-btn__img"
-            />
-            <div class="calendar-dates-btn__info">
-              <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
-              <div class="calendar-dates-btn__month">
-                {{ monthNames[data.date.getMonth()].toLowerCase() }}
+        <div class="calendar-dates">
+          <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
+            <div
+              :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
+              class="calendar-dates__btn calendar-dates-btn"
+              @click="hasHidden(data.date) ? null : clickDate(index)"
+            >
+              <img
+                v-if="hasHidden(data.date)"
+                :src="getStaticUrl('closed.svg')"
+                alt="calendar-dates-btn-closed"
+                class="calendar-dates-btn__img"
+              />
+              <div class="calendar-dates-btn__info">
+                <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
+                <div class="calendar-dates-btn__month">
+                  {{ monthNames[data.date.getMonth()].toLowerCase() }}
+                </div>
+              </div>
+              <div
+                v-if="hasActive(index)"
+                class="calendar-dates-btn--more"
+                @click.stop="clickMore(data)"
+              >
+                <img :src="getStaticUrl('arrow-right.svg')" alt="calendar-dates-btn-arrow-right" />
               </div>
             </div>
-            <div
-              v-if="hasActive(index)"
-              class="calendar-dates-btn--more"
-              @click.stop="clickMore(data)"
-            >
-              <img :src="getStaticUrl('arrow-right.svg')" alt="calendar-dates-btn-arrow-right" />
-            </div>
           </div>
         </div>
-      </div>
 
-      <div class="calendar-footer">
-        <div class="calendar-footer__text">{{ footer.text }}</div>
-        <div class="calendar-footer__nav calendar-footer-nav">
-          <div v-for="(link, index) in footer.links" :key="index" class="calendar-footer-nav__link">
-            {{ link }}
+        <div class="calendar-footer">
+          <div class="calendar-footer__text">{{ footer.text }}</div>
+          <div class="calendar-footer__nav calendar-footer-nav">
+            <div
+              v-for="(link, index) in footer.links"
+              :key="index"
+              class="calendar-footer-nav__link"
+            >
+              {{ link }}
+            </div>
+            <div class="calendar-footer-nav__rating">18+</div>
           </div>
-          <div class="calendar-footer-nav__rating">18+</div>
         </div>
       </div>
-    </div>
-    <div class="calendar-present">
-      <img
-        class="calendar-present__photo"
-        :src="getStaticUrl('presentBig.png')"
-        alt="presentBig-photo"
-      />
-      <img
-        class="calendar-present__photo"
-        :src="getStaticUrl('presentSmall.png')"
-        alt="presentBig-photo"
-      />
+      <div class="calendar-present">
+        <img
+          class="calendar-present__photo"
+          :src="getStaticUrl('presentBig.png')"
+          alt="presentBig-photo"
+        />
+        <img
+          class="calendar-present__photo"
+          :src="getStaticUrl('presentSmall.png')"
+          alt="presentBig-photo"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -72,18 +78,18 @@ export default {
       isModal: false,
       isActive: false,
       monthNames: [
-        'Январь',
-        'Февраль',
-        'Март',
-        'Апрель',
-        'Май',
-        'Июнь',
-        'Июль',
-        'Август',
-        'Сентябрь',
-        'Октябрь',
-        'Ноябрь',
-        'Декабрь',
+        'Января',
+        'Февраля',
+        'Марта',
+        'Апреля',
+        'Мая',
+        'Июня',
+        'Июля',
+        'Августа',
+        'Сентября',
+        'Октября',
+        'Ноября',
+        'Декабря',
       ],
       currentDate: '',
       title: 'Праздник каждый день',
