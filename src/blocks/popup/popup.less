@@ -1,29 +1,22 @@
 @import '../../styles/helpers';
 
-// вынести в btn.less
-.btn {
-  &--primary {
-    background: linear-gradient(90deg, #1538F5 0%, #3A83F7 83.17%);
-    padding: 18px 36px;
-    border-radius: 13px;
-  }
-
-  &--ghost {
-    background: #C7DCFF;
-    padding: 18px 36px;
-    border-radius: 13px;
-  }
-}
-
 .popup {
+  position: inherit;
   max-width: 995px;
   background: #FFF;
   box-shadow: 0 2.76389px 82.9167px rgba(125, 162, 227, 0.25);
   border-radius: 40px;
+  padding: 44px;
 
-  .header {
+  &-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    color: #000;
+  }
+
+  &-header {
     display: flex;
-    padding: 0 44px;
 
     &__info {
       display: flex;
@@ -81,16 +74,19 @@
     }
   }
 
-  .main {
+  &-main {
     .img('bg-form.jpg');
+    position: relative;
     border-radius: 60px;
-    padding: 0 44px;
+    padding: 44px;
+    margin-bottom: 44px;
 
     &__container {
       display: flex;
     }
 
-    .info {
+    &-info {
+      position: inherit;
       max-width: 433px;
 
       &__title {
@@ -100,6 +96,7 @@
         line-height: 96%;
         letter-spacing: -0.05em;
         color: #122790;
+        margin-bottom: 20px;
       }
 
       &__subtitle {
@@ -110,23 +107,124 @@
         letter-spacing: -0.02em;
         color: #102752;
         opacity: 0.7;
+        margin-bottom: 20px;
+      }
+
+      &__design {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        color: #FFF;
+      }
+
+      &__more {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        color: #2353E0;
       }
 
       &__btn {
         display: flex;
+        margin-bottom: 40px;
 
-        &:last-child {
+        & > :last-child {
           margin-left: 12px;
         }
       }
+
+      &__img {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+      }
     }
 
-    .cards {
+    &-cards {
+      display: flex;
+      flex-wrap: wrap;
 
+      &-card {
+        flex-basis: calc(50% - 10px);
+        background: #FFF;
+        box-shadow: 15px 30px 90px rgba(0, 24, 87, 0.1);
+        backdrop-filter: blur(36px);
+        border-radius: 24px;
+        padding: 24px;
+
+        &__title {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 44px;
+          line-height: 48px;
+          letter-spacing: -0.04em;
+          color: #2353E0;
+          margin-bottom: 12px;
+        }
+
+        &__subtitle {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 24px;
+          letter-spacing: -0.01em;
+          color: #102752;
+          opacity: 0.8;
+        }
+      }
+
+      & > :not(:last-child) {
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
     }
   }
 
-  .footer {
-    padding: 0 44px;
+  &-footer {
+    &__title {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 44px;
+      line-height: 96%;
+      letter-spacing: -0.05em;
+      color: #1134B5;
+      margin-bottom: 40px;
+    }
+
+    &-cards {
+      display: flex;
+      flex-wrap: wrap;
+
+      &-card {
+        flex-basis: calc(50% - 12px);
+        flex-grow: 1;
+        background: #FFF;
+        box-shadow: 15px 30px 90px rgba(0, 24, 87, 0.1);
+        backdrop-filter: blur(36px);
+        border-radius: 24px;
+        padding: 24px;
+
+        &__title {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 24px;
+          letter-spacing: -0.01em;
+          color: #102752;
+          opacity: 0.8;
+        }
+      }
+
+      & > :not(:last-child) {
+        margin-right: 12px;
+        margin-bottom: 12px;
+      }
+
+      & > :not(:nth-child(2)) {
+        flex-basis: calc(100% / 3 - 12px);
+      }
+    }
   }
 }

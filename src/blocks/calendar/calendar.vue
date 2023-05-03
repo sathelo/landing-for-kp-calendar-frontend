@@ -3,48 +3,62 @@
     <popup-block v-if="isModal" :data="infoModal" @closeModal="closeModal" />
     <div class="calendar__container">
       <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
-      <div class="calendar__main main">
-        <div class="main__title">{{ title }}</div>
-        <div class="main__subtitle">{{ subtitle }}</div>
+      <div class="calendar-main">
+        <div class="calendar-main__title">{{ title }}</div>
+        <div class="calendar-main__subtitle">{{ subtitle }}</div>
       </div>
 
-      <div class="calendar__dates dates">
-        <div v-for="(data, index) in dates" :key="index" class="dates__container">
+      <div class="calendar-dates">
+        <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
           <div
             :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
-            class="dates__btn btn"
+            class="calendar-dates__btn calendar-dates-btn"
             @click="hasHidden(data.date) ? null : clickDate(index)"
           >
             <img
               v-if="hasHidden(data.date)"
               :src="getStaticUrl('closed.svg')"
-              alt="ico-closed"
-              class="btn__img"
+              alt="calendar-dates-btn-closed"
+              class="calendar-dates-btn__img"
             />
-            <div class="btn__info">
-              <div class="btn__date">{{ data.date.getDate() }}</div>
-              <div class="btn__month">{{ monthNames[data.date.getMonth()].toLowerCase() }}</div>
+            <div class="calendar-dates-btn__info">
+              <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
+              <div class="calendar-dates-btn__month">
+                {{ monthNames[data.date.getMonth()].toLowerCase() }}
+              </div>
             </div>
-            <div v-if="hasActive(index)" class="btn--more" @click.stop="clickMore(data)">
-              <img :src="getStaticUrl('arrow-right.svg')" alt="arrow-right" />
+            <div
+              v-if="hasActive(index)"
+              class="calendar-dates-btn--more"
+              @click.stop="clickMore(data)"
+            >
+              <img :src="getStaticUrl('arrow-right.svg')" alt="calendar-dates-btn-arrow-right" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="calendar__footer footer">
-        <div class="footer__text">{{ footer.text }}</div>
-        <div class="footer__nav nav">
-          <div v-for="(link, index) in footer.links" :key="index" class="nav__link">
+      <div class="calendar-footer">
+        <div class="calendar-footer__text">{{ footer.text }}</div>
+        <div class="calendar-footer__nav calendar-footer-nav">
+          <div v-for="(link, index) in footer.links" :key="index" class="calendar-footer-nav__link">
             {{ link }}
           </div>
-          <div class="nav__rating">18+</div>
+          <div class="calendar-footer-nav__rating">18+</div>
         </div>
       </div>
     </div>
-    <div class="calendar__present present">
-      <img class="present__photo" :src="getStaticUrl('presentBig.png')" alt="presentBig-photo" />
-      <img class="present__photo" :src="getStaticUrl('presentSmall.png')" alt="presentBig-photo" />
+    <div class="calendar-present">
+      <img
+        class="calendar-present__photo"
+        :src="getStaticUrl('presentBig.png')"
+        alt="presentBig-photo"
+      />
+      <img
+        class="calendar-present__photo"
+        :src="getStaticUrl('presentSmall.png')"
+        alt="presentBig-photo"
+      />
     </div>
   </div>
 </template>
