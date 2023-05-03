@@ -1,7 +1,6 @@
 <template>
   <div>
-    <popup-block v-if="isModal" :data="infoModal" @closeModal="closeModal" />
-    <div :class="{ 'open-modal': isModal }" class="calendar">
+    <div class="calendar">
       <div class="calendar__container">
         <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
         <div class="calendar-main">
@@ -10,30 +9,35 @@
         </div>
 
         <div class="calendar-dates">
-          <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
-            <div
-              :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
-              class="calendar-dates__btn calendar-dates-btn"
-              @click="hasHidden(data.date) ? null : clickDate(index)"
-            >
-              <img
-                v-if="hasHidden(data.date)"
-                :src="getStaticUrl('closed.svg')"
-                alt="calendar-dates-btn-closed"
-                class="calendar-dates-btn__img"
-              />
-              <div class="calendar-dates-btn__info">
-                <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
-                <div class="calendar-dates-btn__month">
-                  {{ monthNames[data.date.getMonth()].toLowerCase() }}
-                </div>
-              </div>
+          <div class="calendar-dates-inner">
+            <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
               <div
-                v-if="hasActive(index)"
-                class="calendar-dates-btn--more"
-                @click.stop="clickMore(data)"
+                :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
+                class="calendar-dates__btn calendar-dates-btn"
+                @click="hasHidden(data.date) ? null : clickDate(index)"
               >
-                <img :src="getStaticUrl('arrow-right.svg')" alt="calendar-dates-btn-arrow-right" />
+                <img
+                  v-if="hasHidden(data.date)"
+                  :src="getStaticUrl('closed.svg')"
+                  alt="calendar-dates-btn-closed"
+                  class="calendar-dates-btn__img"
+                />
+                <div class="calendar-dates-btn__info">
+                  <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
+                  <div class="calendar-dates-btn__month">
+                    {{ monthNames[data.date.getMonth()].toLowerCase() }}
+                  </div>
+                </div>
+                <div
+                  v-if="hasActive(index)"
+                  class="calendar-dates-btn--more"
+                  @click.stop="clickMore(data)"
+                >
+                  <img
+                    :src="getStaticUrl('arrow-right.svg')"
+                    alt="calendar-dates-btn-arrow-right"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -66,6 +70,7 @@
         />
       </div>
     </div>
+    <popup-block v-if="isModal" :data="infoModal" @closeModal="closeModal" />
   </div>
 </template>
 
