@@ -3,6 +3,7 @@
     <div class="calendar">
       <div class="calendar__container">
         <img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo" />
+        <div class="calendar__photo" />
         <div class="calendar-main">
           <div class="calendar-main__title">{{ title }}</div>
           <div class="calendar-main__subtitle">{{ subtitle }}</div>
@@ -58,11 +59,6 @@
         </div>
       </div>
       <div class="calendar-present">
-        <!-- <img
-          class="calendar-present__photo"
-          :src="getStaticUrl('presentBig.png')"
-          alt="presentBig-photo"
-        /> -->
         <img
           class="calendar-present__photo"
           :src="getStaticUrl('presentBig.png')"
