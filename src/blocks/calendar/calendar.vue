@@ -58,6 +58,11 @@
         </div>
       </div>
       <div class="calendar-present">
+        <!-- <img
+          class="calendar-present__photo"
+          :src="getStaticUrl('presentBig.png')"
+          alt="presentBig-photo"
+        /> -->
         <img
           class="calendar-present__photo"
           :src="getStaticUrl('presentBig.png')"
