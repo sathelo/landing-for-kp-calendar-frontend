@@ -106,26 +106,13 @@
 
   &-dates {
     width: 100vw;
-    overflow-x: scroll;
+    overflow-y: hidden;
+    overflow-x: auto;
     padding-left: 13%;
     margin-bottom: 51px;
-    scrollbar-width: thin;
-    scrollbar-color: #6D8CE6 transparent;
 
     &::-webkit-scrollbar {
-      width: 6px;
-      height: 12px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      margin: 150px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #6D8CE6;
-      border-radius: 20px;
-      border: 1px solid transparent;
+      display: none;
     }
 
     &-inner {

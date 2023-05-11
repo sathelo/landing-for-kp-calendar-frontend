@@ -24,7 +24,7 @@
 
     @media @mobile {
       border-radius: 0;
-      padding: 24px;
+      padding: 24px 24px 48px 24px;
     }
   }
 
@@ -128,6 +128,11 @@
       @media @mobile {
         width: 100%;
         text-align: center;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #FFF;
       }
     }
 
@@ -210,6 +215,14 @@
         font-size: 18px;
         line-height: 24px;
         color: #FFF;
+
+        @media @mobile {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #FFF;
+        }
       }
 
       &__more {
@@ -218,6 +231,14 @@
         font-size: 18px;
         line-height: 24px;
         color: #2353E0;
+
+        @media @mobile {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #2353E0;
+        }
       }
 
       &__btn {
@@ -254,7 +275,8 @@
         right: 24px;
 
         @media @mobile {
-          top: 306px;
+          max-width: 339.33px;
+          top: 325px;
           left: 50%;
           transform: translate(-50%);
         }
@@ -282,6 +304,15 @@
           letter-spacing: -0.04em;
           color: #2353E0;
           margin-bottom: 12px;
+
+          @media @mobile {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: -0.02em;
+            color: #1134B5;
+          }
         }
 
         &__subtitle {
@@ -292,6 +323,21 @@
           letter-spacing: -0.01em;
           color: #102752;
           opacity: 0.8;
+
+          @media @mobile {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 120%;
+            letter-spacing: -0.01em;
+            color: #102752;
+            opacity: 0.8;
+          }
+        }
+
+        @media @mobile {
+          border-radius: 13px;
+          padding: 12px;
         }
       }
 
@@ -307,11 +353,27 @@
       & > :nth-last-child(-n + 2) {
         margin-bottom: 0;
       }
+
+      @media @mobile {
+        & > :not(:nth-last-child(-n + 2)) {
+          margin-right: 6px;
+          margin-bottom: 6px;
+        }
+
+        & > :not(:nth-child(-n + 2)) {
+          margin-right: 6px;
+        }
+      }
     }
 
     @media @mobile {
       margin: -24px;
       padding: 24px;
+      border-radius: 36px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center center;
+      margin-bottom: 24px;
     }
   }
 
@@ -324,6 +386,16 @@
       letter-spacing: -0.05em;
       color: #1134B5;
       margin-bottom: 40px;
+
+      @media @mobile {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 100%;
+        letter-spacing: -0.02em;
+        color: #1134B5;
+        margin-bottom: 24px;
+      }
     }
 
     &-cards {
@@ -347,16 +419,44 @@
           letter-spacing: -0.01em;
           color: #102752;
           opacity: 0.8;
+
+          @media @mobile {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: -0.01em;
+            color: #102752;
+          }
+        }
+
+        @media @mobile {
+          flex-basis: 100%;
         }
       }
 
       & > :not(:nth-child(-n + 2)) {
         flex-basis: calc(100% / 3 - 12px);
         margin-top: 12px;
+
+        @media @mobile {
+          flex-basis: 100%;
+          margin-top: 0;
+        }
       }
 
       & > :not(:nth-child(5n + 2)):not(:nth-child(5n + 5)) {
         margin-right: 12px;
+
+        @media @mobile {
+          margin-right: 0;
+        }
+      }
+
+      @media @mobile {
+        & > *:not(:last-child) {
+          margin-bottom: 6px;
+        }
       }
     }
   }

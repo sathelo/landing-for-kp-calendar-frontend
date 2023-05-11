@@ -1,7 +1,7 @@
 <template>
   <div class="popup" @click.self="closeModal">
     <div class="popup-inner">
-      <div class="popup-close btn--outline" @click="closeModal">
+      <div class="popup-close btn btn--outline" @click="closeModal">
         <img :src="getStaticUrl('closed-ico.svg')" alt="close-modal" class="popup-close__img" />
       </div>
 
@@ -12,7 +12,9 @@
           </div>
           <div class="popup-header__title">{{ data.title }}</div>
           <div class="popup-header__subtitle">{{ data.subtitle }}</div>
-          <div class="popup-header__btn btn--primary">Посмотреть фильм</div>
+          <a :href="data.link" target="_blank" class="popup-header__btn btn btn--primary"
+            >Посмотреть фильм</a
+          >
         </div>
         <img :src="getStaticUrl(data.img)" alt="popup-header-photo" class="popup-header__img" />
       </div>
@@ -25,8 +27,23 @@
               Оформите прямо сейчас бесплатную картус&nbsp;кешбэком&nbsp;2% в&nbsp;топ-категориях
             </div>
             <div class="popup-main-info__btn">
-              <div class="popup-main-info__design btn--primary">Оформить карту</div>
-              <div class="popup-main-info__more btn--ghost">Подробнее</div>
+              <a
+                href="https://online.vtb.ru/debit-card/step1/multicard-ready?code=media_kinopoisk_dbdk&utm_source=kinopoisk&utm_medium=media&utm_campaign=media_dbdk_kinopoisk_link_button_issue_card_cpc_rf_p1_feb_apr
+"
+                target="_blank"
+                class="popup-main-info__design btn btn--primary"
+                @click="clickHandler"
+              >
+                Оформить карту
+              </a>
+              <a
+                href="https://www.vtb.promo/daily?code=media_kinopoisk_dbdk&utm_source=kinopoisk&utm_medium=media&utm_campaign=media_dbdk_kinopoisk_link_button_more_cpc_rf_p1_feb_apr
+"
+                target="_blank"
+                class="popup-main-info__more btn btn--ghost"
+                @click="clickHandler"
+                >Подробнее</a
+              >
             </div>
           </div>
           <img
@@ -120,6 +137,9 @@ export default {
   methods: {
     closeModal() {
       this.$emit('closeModal');
+    },
+    clickHandler(e) {
+      console.log(e);
     },
   },
 };
