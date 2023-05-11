@@ -1,4 +1,6 @@
 .btn {
+  transition: 0.2s;
+
   &--outline {
     border: 1.42857px solid rgba(16, 39, 82, 0.1);
     padding: 14px;
@@ -15,5 +17,30 @@
     background: #C7DCFF;
     padding: 18px 36px;
     border-radius: 13px;
+  }
+
+  &--underlining {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #102752;
+      transition: width 0.3s ease-out;
+      opacity: 0.3;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    transition: 0.2s;
+    transform: scale3d(1.05, 1.05, 1.05);
   }
 }
