@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.7",
+    "lodash": "^4.17.21",
     "vue": "^2.6.14",
     "vuex": "^3.6.2"
   },

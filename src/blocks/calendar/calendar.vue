@@ -16,33 +16,42 @@
 
         <div class="calendar-dates">
           <div class="calendar-dates-inner">
-            <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
-              <div
-                :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
-                class="calendar-dates__btn calendar-dates-btn"
-                @click="hasHidden(data.date) ? null : clickDate(index)"
-              >
-                <img
-                  v-if="hasHidden(data.date)"
-                  :src="getStaticUrl('closed.svg')"
-                  alt="calendar-dates-btn-closed"
-                  class="calendar-dates-btn__img"
-                />
-                <div class="calendar-dates-btn__info">
-                  <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
-                  <div class="calendar-dates-btn__month">
-                    {{ monthNames[data.date.getMonth()].toLowerCase() }}
-                  </div>
-                </div>
+            <div
+              v-for="(date, dateIndex) in datesMutation"
+              :key="dateIndex"
+              class="calendar-dates__container"
+            >
+              <div v-for="data in date" :key="dates.indexOf(data)">
                 <div
-                  v-if="hasActive(index)"
-                  class="calendar-dates-btn--more"
-                  @click.stop="clickMore(data)"
+                  :class="{
+                    'btn--hidden': hasHidden(data.date),
+                    'btn--active': hasActive(dates.indexOf(data)),
+                  }"
+                  class="calendar-dates__btn calendar-dates-btn"
+                  @click="hasHidden(data.date) ? null : clickDate(dates.indexOf(data))"
                 >
                   <img
-                    :src="getStaticUrl('arrow-right.svg')"
-                    alt="calendar-dates-btn-arrow-right"
+                    v-if="hasHidden(data.date)"
+                    :src="getStaticUrl('closed.svg')"
+                    alt="calendar-dates-btn-closed"
+                    class="calendar-dates-btn__img"
                   />
+                  <div class="calendar-dates-btn__info">
+                    <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
+                    <div class="calendar-dates-btn__month">
+                      {{ monthNames[data.date.getMonth()].toLowerCase() }}
+                    </div>
+                  </div>
+                  <div
+                    v-if="hasActive(dates.indexOf(data))"
+                    class="calendar-dates-btn--more"
+                    @click.stop="clickMore(data)"
+                  >
+                    <img
+                      :src="getStaticUrl('arrow-right.svg')"
+                      alt="calendar-dates-btn-arrow-right"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,10 +92,13 @@
 </template>
 
 <script>
+import lodash from 'lodash';
+
 export default {
   name: 'calendar-block',
   data() {
     return {
+      datesMutation: Object,
       infoModal: Object,
       isModal: false,
       isActive: false,
@@ -365,10 +377,12 @@ export default {
     };
   },
   beforeMount() {
+    this.datesMutation = this.chunk(this.dates, this.dates.length / 2);
     this.currentDate = new Date();
   },
   methods: {
     clickDate(dataId) {
+      console.log(dataId);
       if (this.isActive !== dataId) this.isActive = dataId;
       else {
         this.isActive = false;
@@ -387,6 +401,9 @@ export default {
     },
     closeModal() {
       this.isModal = !this.isModal;
+    },
+    chunk(dates, size) {
+      return lodash.chunk(dates, size);
     },
   },
 };
