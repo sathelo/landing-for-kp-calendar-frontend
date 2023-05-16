@@ -3,10 +3,11 @@
     <div class="calendar">
       <div class="calendar__container">
         <a
+          class="calendar__logo"
           href="https://www.vtb.promo/daily?code=media_kinopoisk_dbdk&utm_source=kinopoisk&utm_medium=media&utm_campaign=media_dbdk_kinopoisk_link_logo_cpc_rf_p1_feb_apr
 "
           target="_blank"
-          ><img class="calendar__logo" :src="getStaticUrl('logo.svg')" alt="calendar-logo"
+          ><img :src="getStaticUrl('logo.svg')" alt="calendar-logo"
         /></a>
         <div class="calendar__photo" />
         <div class="calendar-main">
@@ -15,34 +16,30 @@
         </div>
 
         <div class="calendar-dates">
-          <div class="calendar-dates-inner">
-            <div v-for="(data, index) in dates" :key="index" class="calendar-dates__container">
-              <div
-                :class="{ 'btn--hidden': hasHidden(data.date), 'btn--active': hasActive(index) }"
-                class="calendar-dates__btn calendar-dates-btn"
-                @click="hasHidden(data.date) ? null : clickDate(index)"
-              >
-                <img
-                  v-if="hasHidden(data.date)"
-                  :src="getStaticUrl('closed.svg')"
-                  alt="calendar-dates-btn-closed"
-                  class="calendar-dates-btn__img"
-                />
-                <div class="calendar-dates-btn__info">
-                  <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
-                  <div class="calendar-dates-btn__month">
-                    {{ monthNames[data.date.getMonth()].toLowerCase() }}
-                  </div>
-                </div>
-                <div
-                  v-if="hasActive(index)"
-                  class="calendar-dates-btn--more"
-                  @click.stop="clickMore(data)"
-                >
-                  <img
-                    :src="getStaticUrl('arrow-right.svg')"
-                    alt="calendar-dates-btn-arrow-right"
-                  />
+          <div
+            v-for="(date, dateIndex) in getDates"
+            :key="dateIndex"
+            class="calendar-dates__container"
+          >
+            <div
+              v-for="data in date"
+              :key="dates.indexOf(data)"
+              :class="{
+                'btn--hidden': hasHidden(data.date),
+              }"
+              class="calendar-dates__btn calendar-dates-btn"
+              @click="hasHidden(data.date) ? null : clickDate(data)"
+            >
+              <img
+                v-if="hasHidden(data.date)"
+                :src="getStaticUrl('closed.svg')"
+                alt="calendar-dates-btn-closed"
+                class="calendar-dates-btn__img"
+              />
+              <div class="calendar-dates-btn__info">
+                <div class="calendar-dates-btn__date">{{ data.date.getDate() }}</div>
+                <div class="calendar-dates-btn__month">
+                  {{ monthNames[data.date.getMonth()].toLowerCase() }}
                 </div>
               </div>
             </div>
@@ -83,10 +80,14 @@
 </template>
 
 <script>
+import lodash from 'lodash';
+
 export default {
   name: 'calendar-block',
   data() {
     return {
+      isMobile: false,
+      datesMutation: Array,
       infoModal: Object,
       isModal: false,
       isActive: false,
@@ -342,7 +343,7 @@ export default {
           link: 'https://www.kinopoisk.ru/film/996027/',
         },
         {
-          date: new Date(2023, 4, 10),
+          date: new Date(2023, 4, 20),
           title: '',
           subtitle: '',
           img: '',
@@ -364,15 +365,25 @@ export default {
       },
     };
   },
+  computed: {
+    getDates() {
+      return this.isMobile ? [this.dates] : this.datesMutation;
+    },
+  },
   beforeMount() {
+    this.datesMutation = this.chunk(this.dates, this.dates.length / 2);
     this.currentDate = new Date();
+    window.addEventListener('resize', this.resizeHandler);
+    this.resizeHandler();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
   methods: {
-    clickDate(dataId) {
-      if (this.isActive !== dataId) this.isActive = dataId;
-      else {
-        this.isActive = false;
-      }
+    clickDate(data) {
+      this.isModal = !this.isModal;
+      this.isActive = !this.isActive;
+      this.infoModal = data;
     },
     hasHidden(date) {
       return this.currentDate - date <= 0;
@@ -380,13 +391,14 @@ export default {
     hasActive(dataId) {
       return this.isActive === dataId;
     },
-    clickMore(data) {
-      this.isModal = !this.isModal;
-      this.isActive = !this.isActive;
-      this.infoModal = data;
-    },
     closeModal() {
       this.isModal = !this.isModal;
+    },
+    chunk(dates, size) {
+      return lodash.chunk(dates, size);
+    },
+    resizeHandler() {
+      this.isMobile = window.innerWidth < 600;
     },
   },
 };
