@@ -2,13 +2,26 @@
   <div>
     <div class="calendar">
       <div class="calendar__container">
-        <a
-          class="calendar__logo"
-          href="https://www.vtb.promo/daily?code=media_kinopoisk_dbdk&utm_source=kinopoisk&utm_medium=media&utm_campaign=media_dbdk_kinopoisk_link_logo_cpc_rf_p1_feb_apr
+        <div class="calendar-logo">
+          <a
+            href="https://www.vtb.promo/daily?code=media_kinopoisk_dbdk&utm_source=kinopoisk&utm_medium=media&utm_campaign=media_dbdk_kinopoisk_link_logo_cpc_rf_p1_feb_apr
 "
-          target="_blank"
-          ><img :src="getStaticUrl('logo.svg')" alt="calendar-logo"
-        /></a>
+            target="_blank"
+          >
+            <img
+              class="calendar-logo__vtb"
+              :src="getStaticUrl('logo-vtb.svg')"
+              alt="calendar-logo-vtb"
+            />
+          </a>
+          <a href="https://www.kinopoisk.ru/?utm_referrer=www.google.com" target="_blank">
+            <img
+              class="calendar-logo__kp"
+              :src="getStaticUrl('logo-kp.svg')"
+              alt="calendar-logo-kp"
+            />
+          </a>
+        </div>
         <div class="calendar__photo" />
         <div class="calendar-main">
           <div class="calendar-main__title">{{ title }}</div>
