@@ -11,6 +11,7 @@
   padding: 30px 0;
 
   &-logo {
+    z-index: 2;
     display: flex;
     margin-bottom: 64px;
     max-width: 371px;
@@ -70,6 +71,10 @@
     flex-direction: column;
     text-align: center;
     width: 100%;
+
+    & > * {
+      z-index: 2;
+    }
 
     &__title {
       max-width: 620px;
@@ -335,11 +340,18 @@
   }
 
   &-footer {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 960px;
 
+    & > * {
+      z-index: 2;
+    }
+
     &__text {
+      text-align: center;
       font-style: normal;
       font-weight: 400;
       font-size: 12px;
@@ -349,6 +361,7 @@
       margin-bottom: 13px;
 
       @media @mobile {
+        text-align: left;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -372,7 +385,7 @@
         margin-right: 20px;
 
         @media @mobile {
-          margin-right: 0;
+          margin-right: 10px;
         }
       }
 
