@@ -103,7 +103,6 @@ export default {
       infoModal: Object,
       isModal: false,
       isActive: false,
-      currentDate: '',
       title: 'Праздник каждый день',
       subtitle:
         'День шепота, День спонтанности, День рождения видеомагнитофона\u00A0\u2013 окунитесь в\u00A0календарь ежедневных поводов улыбнуться, а\u00A0решение повседневных задач доверьте банку ВТБ.',
@@ -112,6 +111,9 @@ export default {
   computed: {
     currentDates() {
       return this.isMobile ? [this.dates] : this.datesChunk;
+    },
+    currentDate() {
+      return this.$store.getters.currentDate;
     },
     dates() {
       return this.$store.state.bunker.dates.map((date) => ({ ...date, date: new Date(date.date) }));
