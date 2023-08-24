@@ -8,7 +8,7 @@
     "dev": "webpack serve --mode=development",
     "dev-kp": "sudo webpack serve --mode=development --host=dev.kinopoisk.ru --port=443 --https",
     "build": "webpack --mode=production",
-    "deploy": "gh-pages -d dist"
+    "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.16.7",
