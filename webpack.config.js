@@ -12,7 +12,12 @@ const nameRepo = process.env.npm_package_name; // for gh-pages
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
   const isDevelopment = argv.mode === 'development';
-  const myPublicPath = (nameRepo && !isDevelopment) || (isProduction ? '../' : '/');
+  let myPublicPath = '';
+
+  if (nameRepo && !isDevelopment) myPublicPath = nameRepo;
+  else {
+    myPublicPath = isProduction ? '../' : '/';
+  }
 
   if (isProduction) {
     process.env.NODE_ENV = 'production';
