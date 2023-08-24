@@ -7,7 +7,7 @@ const plugins = require('./webpack/plugins');
 const optimization = require('./webpack/optimization');
 
 const projectName = '';
-const nameRepo = process.env.npm_package_name; // for gh-pages
+const nameRepo = `/${process.env.npm_package_name}/`; // for gh-pages
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
