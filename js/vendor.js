@@ -1,4 +1,4 @@
-(self.webpackChunk=self.webpackChunk||[]).push([[736],{486:function(t,n,e){var r;
+(self.webpackChunklanding_for_kp_calendar_frontend=self.webpackChunklanding_for_kp_calendar_frontend||[]).push([[736],{486:function(t,n,e){var r;
 /**
  * @license
  * Lodash <https://lodash.com/>
