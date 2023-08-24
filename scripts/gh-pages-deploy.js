@@ -1,10 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { publish } from 'gh-pages';
+const ghpages = require('gh-pages');
 
-publish(
-  'dist',
-  {
-    branch: 'gh-pages',
-  },
-  function () {}
-);
+ghpages.publish('dist', function (err) {});
